@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url]
 
 * Студент: [Endless Hatred](https://up.htmlacademy.ru/javascript/14/user/239126).
-* Наставник: `Неизвестно`.
+* Наставник: [Анастасия Норцова](https://up.htmlacademy.ru/javascript/14/user/143546).
 
 ---
 
