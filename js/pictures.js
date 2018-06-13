@@ -44,7 +44,7 @@ var placeBlockPicturesHTML = function (documentFragment, arrayObjects) {
   return pictureMainBlock.appendChild(documentFragment);
 };
 
-var renderBigPicture = function (bigPictureFeature, picturesArray) {
+var renderBigPicture = function (bigPictureFeature) {
   var bigPictureElement = bigPictureBlock.cloneNode(true);
   bigPictureElement.querySelector('.big-picture__img').querySelector('img').src = bigPictureFeature.url;
   bigPictureElement.querySelector('.likes-count').textContent = bigPictureFeature.likes;
@@ -57,7 +57,7 @@ var renderBigPicture = function (bigPictureFeature, picturesArray) {
 };
 
 var renderComments = function (arrayObjects) {
-   var elementCommentFragment = elementComment;
+  var elementCommentFragment = elementComment;
   for (var i = 0; i < elementCommentFragment.length; i++) {
     elementCommentFragment[i].querySelector('img').src = 'img/avatar-' + Math.floor(Math.random() * 6 + 1) + '.svg';
     elementCommentFragment[i].querySelector('.social__text').textContent = arrayObjects[i].comments;
@@ -71,4 +71,4 @@ bigPictureBlock.classList.remove('hidden');
 
 renderBigPicture(pictures[0], pictures);
 
-var replacedPicture = main.replaceChild(renderBigPicture(pictures[0]), bigPictureBlock);
+main.replaceChild(renderBigPicture(pictures[0]), bigPictureBlock);
