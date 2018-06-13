@@ -18,7 +18,7 @@ var fragment = document.createDocumentFragment();
 var renderArrayObject = function (arrayObjects, quantity) {
   for (var i = 0; i < quantity; i++) {
     arrayObjects[i] = {
-      url:'photos/' + (i + 1) + '.jpg',
+      url: 'photos/' + (i + 1) + '.jpg',
       likes: Math.floor(Math.random() * 186 + 15),
       comments: COMMENTS_ARRAY[Math.floor(Math.random() * COMMENTS_ARRAY.length)],
       description: DESCRIPTION_ARRAY[Math.floor(Math.random() * DESCRIPTION_ARRAY.length)]
@@ -51,10 +51,10 @@ var renderBigPicture = function (bigPicture, bigPictureFeature) {
   bigPicture.querySelector('.social__caption').textContent = bigPictureFeature.description;
 };
 
-var renderComments = function (elementComment, arrayObjects) {
-  for (var i = 0; i < elementComment.length; i++) {
-    elementComment[i].querySelector('img').src = 'img/avatar-' + Math.floor(Math.random() * 6 + 1) + '.svg';
-    elementComment[i].querySelector('.social__text').textContent = arrayObjects[i].comments;
+var renderComments = function (commentFragment, arrayObjects) {
+  for (var i = 0; i < commentFragment.length; i++) {
+    commentFragment[i].querySelector('img').src = 'img/avatar-' + Math.floor(Math.random() * 6 + 1) + '.svg';
+    commentFragment[i].querySelector('.social__text').textContent = arrayObjects[i].comments;
   }
 };
 
