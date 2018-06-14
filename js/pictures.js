@@ -53,7 +53,7 @@ var renderComments = function (arrayObjects) {
   return elementCommentFragment;
 };
 
-var renderBigPicture = function (bigPictureFeature, arrayObjects) {
+var renderBigPicture = function (bigPictureFeature) {
   var bigPictureElement = bigPictureBlock.cloneNode(true);
   bigPictureElement.querySelector('.big-picture__img').querySelector('img').src = bigPictureFeature.url;
   bigPictureElement.querySelector('.likes-count').textContent = bigPictureFeature.likes;
