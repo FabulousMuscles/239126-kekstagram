@@ -9,7 +9,7 @@ var renderArrayObject = function (quantity) {
     arrayObjects[i] = {
       url: 'photos/' + (i + 1) + '.jpg',
       likes: Math.floor(Math.random() * 186 + 15),
-      comments: COMMENTS_ARRAY[Math.floor(Math.random() * COMMENTS_ARRAY.length)],
+      comments: [COMMENTS_ARRAY[Math.floor(Math.random() * COMMENTS_ARRAY.length)], COMMENTS_ARRAY[Math.floor(Math.random() * COMMENTS_ARRAY.length)]],
       description: DESCRIPTION_ARRAY[Math.floor(Math.random() * DESCRIPTION_ARRAY.length)]
     };
   }
@@ -48,27 +48,26 @@ var renderComments = function (arrayObjects) {
   var elementCommentFragment = elementComment;
   for (var i = 0; i < elementCommentFragment.length; i++) {
     elementCommentFragment[i].querySelector('img').src = 'img/avatar-' + Math.floor(Math.random() * 6 + 1) + '.svg';
-    elementCommentFragment[i].querySelector('.social__text').textContent = arrayObjects[i].comments;
+    elementCommentFragment[i].querySelector('.social__text').textContent = arrayObjects.comments[i];
   }
   return elementCommentFragment;
 };
 
-var renderBigPicture = function (bigPictureFeature) {
+var renderBigPicture = function (arrayObjects) {
   var bigPictureElement = bigPictureBlock.cloneNode(true);
-  bigPictureElement.querySelector('.big-picture__img').querySelector('img').src = bigPictureFeature.url;
-  bigPictureElement.querySelector('.likes-count').textContent = bigPictureFeature.likes;
-  bigPictureElement.querySelector('.comments-count').textContent = bigPictureFeature.comments.length;
-  bigPictureElement.querySelector('.social__caption').textContent = bigPictureFeature.description;
+  bigPictureElement.querySelector('.big-picture__img').querySelector('img').src = arrayObjects.url;
+  bigPictureElement.querySelector('.likes-count').textContent = arrayObjects.likes;
+  bigPictureElement.querySelector('.comments-count').textContent = arrayObjects.comments.length;
+  bigPictureElement.querySelector('.social__caption').textContent = arrayObjects.description;
   bigPictureElement.querySelector('.social__comment-count').classList.add('visually-hidden');
   bigPictureElement.querySelector('.social__loadmore').classList.add('visually-hidden');
+  renderComments(arrayObjects);
 
   return bigPictureElement;
 };
 
 placeBlockPicturesHTML(fragment, pictures);
+
 bigPictureBlock.classList.remove('hidden');
-
 renderBigPicture(pictures[0]);
-renderComments(pictures);
-
 main.replaceChild(renderBigPicture(pictures[0]), bigPictureBlock);
