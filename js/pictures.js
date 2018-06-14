@@ -44,18 +44,6 @@ var placeBlockPicturesHTML = function (documentFragment, arrayObjects) {
   return pictureMainBlock.appendChild(documentFragment);
 };
 
-var renderBigPicture = function (bigPictureFeature) {
-  var bigPictureElement = bigPictureBlock.cloneNode(true);
-  bigPictureElement.querySelector('.big-picture__img').querySelector('img').src = bigPictureFeature.url;
-  bigPictureElement.querySelector('.likes-count').textContent = bigPictureFeature.likes;
-  bigPictureElement.querySelector('.comments-count').textContent = bigPictureFeature.comments.length;
-  bigPictureElement.querySelector('.social__caption').textContent = bigPictureFeature.description;
-  bigPictureElement.querySelector('.social__comment-count').classList.add('visually-hidden');
-  bigPictureElement.querySelector('.social__loadmore').classList.add('visually-hidden');
-  renderComments(pictures);
-  return bigPictureElement;
-};
-
 var renderComments = function (arrayObjects) {
   var elementCommentFragment = elementComment;
   for (var i = 0; i < elementCommentFragment.length; i++) {
@@ -63,6 +51,19 @@ var renderComments = function (arrayObjects) {
     elementCommentFragment[i].querySelector('.social__text').textContent = arrayObjects[i].comments;
   }
   return elementCommentFragment;
+};
+
+var renderBigPicture = function (bigPictureFeature, arrayObjects) {
+  var bigPictureElement = bigPictureBlock.cloneNode(true);
+  bigPictureElement.querySelector('.big-picture__img').querySelector('img').src = bigPictureFeature.url;
+  bigPictureElement.querySelector('.likes-count').textContent = bigPictureFeature.likes;
+  bigPictureElement.querySelector('.comments-count').textContent = bigPictureFeature.comments.length;
+  bigPictureElement.querySelector('.social__caption').textContent = bigPictureFeature.description;
+  bigPictureElement.querySelector('.social__comment-count').classList.add('visually-hidden');
+  bigPictureElement.querySelector('.social__loadmore').classList.add('visually-hidden');
+  renderComments(arrayObjects);
+
+  return bigPictureElement;
 };
 
 
