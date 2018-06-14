@@ -61,15 +61,14 @@ var renderBigPicture = function (bigPictureFeature, arrayObjects) {
   bigPictureElement.querySelector('.social__caption').textContent = bigPictureFeature.description;
   bigPictureElement.querySelector('.social__comment-count').classList.add('visually-hidden');
   bigPictureElement.querySelector('.social__loadmore').classList.add('visually-hidden');
-  renderComments(arrayObjects);
 
   return bigPictureElement;
 };
 
-
-placeBlockPicturesHTML(fragment, pictures, renderPictures);
+placeBlockPicturesHTML(fragment, pictures);
 bigPictureBlock.classList.remove('hidden');
 
-renderBigPicture(pictures[0], pictures);
+renderBigPicture(pictures[0]);
+renderComments(pictures);
 
 main.replaceChild(renderBigPicture(pictures[0]), bigPictureBlock);
