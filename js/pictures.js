@@ -4,7 +4,7 @@ var COMMENTS_ARRAY = ['Всё отлично!', 'В целом всё непло
 var DESCRIPTION_ARRAY = ['Тестим новую камеру!', 'Затусили с друзьями на море', 'Как же круто тут кормят', 'Отдыхаем...', 'Цените каждое мгновенье. Цените тех, кто рядом с вами и отгоняйте все сомненья. Не обижайте всех словами......', 'Вот это тачка!'];
 
 var ESC_KEYCODE = 27;
-var ENTER_KEYCODE = 13;
+
 
 var renderArrayObject = function (quantity) {
   var arrayObjects = [];
@@ -28,15 +28,12 @@ var pictureTemplate = document.querySelector('#picture')
 
 var uploadSelectImage = document.querySelector('#upload-select-image');
 var uploadFileInput = uploadSelectImage.querySelector('#upload-file');
-var uploadFileLabel = uploadSelectImage.querySelector('.img-upload__label');
 var currentInputValue = '';
-var currentEffect = document.querySelector('.effects__preview--chrome');
 var imgUpload = uploadSelectImage.querySelector('.img-upload__overlay');
 var imgUploadPreview = uploadSelectImage.querySelector('.img-upload__preview');
 var imgUploadPreviewFilterClass;
 var inputTarget;
 var renderedPicture;
-var scaleData = document.querySelector('.scale__value');
 var effectsList = document.querySelector('.effects__list');
 
 
