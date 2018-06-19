@@ -83,7 +83,7 @@ var renderBigPicture = function (arrayObjects) {
 
 var openPopup = function () {
   imgUpload.classList.remove('hidden');
-  document.addEventListener('keydown', popupKeydownHandler)
+  document.addEventListener('keydown', popupKeydownHandler);
 };
 
 var closePopup = function () {
@@ -93,7 +93,7 @@ var closePopup = function () {
 
 var closeGallery = function () {
   renderedPicture.classList.add('hidden');
-  document.removeEventListener('keydown', galleryKeydownHandler)
+  document.removeEventListener('keydown', galleryKeydownHandler);
 };
 
 var popupKeydownHandler = function (evt) {
@@ -103,7 +103,7 @@ var popupKeydownHandler = function (evt) {
 };
 
 var galleryKeydownHandler = function (evt) {
-   if (evt.keyCode === ESC_KEYCODE) {
+  if (evt.keyCode === ESC_KEYCODE) {
     closeGallery();
   }
 };
@@ -112,13 +112,13 @@ var inputChangeHandler = function (evt) {
   if (currentInputValue === uploadFileInput.value) {
     evt.preventDefault();
   } else {
-    currentInputValue = uploadFileInput.value
+    currentInputValue = uploadFileInput.value;
     openPopup();
   }
 };
 
 
-var toggleFiltres = function(evt) {
+var toggleFiltres = function (evt) {
   var filterEffectButton = evt.target.nextElementSibling.firstElementChild;
   if (imgUploadPreview.classList.length === 1) {
     imgUploadPreview.classList.add(filterEffectButton.classList.item(1));
@@ -159,7 +159,7 @@ var inputFocusHandler = function (evt) {
   return inputTarget;
 };
 
-var imgUploadClickHandler = function(evt) {
+var imgUploadClickHandler = function (evt) {
   var elementTarget = evt.target;
   if (elementTarget.id === 'upload-cancel') {
     closePopup();
@@ -186,7 +186,7 @@ var pictureMainBlockHandler = function (evt) {
       renderedPicture = main.appendChild(renderBigPicture(pictures[i]));
     }
   }
-  document.addEventListener('keydown', galleryKeydownHandler)
+  document.addEventListener('keydown', galleryKeydownHandler);
   renderedPicture.addEventListener('click', renderedPictureClickHandler);
 
   return renderedPicture;
