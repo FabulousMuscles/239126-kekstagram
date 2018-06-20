@@ -94,7 +94,7 @@ var isIdentically = function (element, array) {
   for (var i = 0; i < array.length; i++) {
     if (element.toLowerCase() !== array[i].toLowerCase()) {
 
-      return false;
+
     } else {
       return true;
     }
