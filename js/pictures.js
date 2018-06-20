@@ -202,9 +202,9 @@ var pictureMainBlockHandler = function (evt) {
     var elementTargetImg = evt.target.src;
     for (var i = 0; i < pictures.length; i++) {
       if (elementTargetImg.includes(pictures[i].url)) {
-            bigPictureBlock.classList.remove('hidden');
-            renderBigPicture(pictures[i]);
-            renderedPicture = main.appendChild(renderBigPicture(pictures[i]));
+          bigPictureBlock.classList.remove('hidden');
+          renderBigPicture(pictures[i]);
+          renderedPicture = main.appendChild(renderBigPicture(pictures[i]));
       }
     }
     document.addEventListener('keydown', galleryKeydownHandler);
@@ -219,26 +219,26 @@ var textInputValueInputHandler = function (evt) {
     var hashtagArray = evt.target.value.split(' ');
     for (var i = 0; i < hashtagArray.length; i++) {
       if (hashtagArray.length > 5) {
-      evt.target.setCustomValidity('Нельзя указать больше пяти хэш-тегов');
-    }   else if (evt.target.value === '') {
-      evt.target.setCustomValidity('');
-    }   else if (hashtagArray[i].indexOf(',') !== -1) {
-      evt.target.setCustomValidity('хэш-теги разделяются пробелами');
-    }   else if (hashtagArray[i].indexOf('#') !== 0) {
-      evt.target.setCustomValidity('хэш-тег начинается с символа # (решётка)');
-    }   else if (hashtagArray[i].length === 1 && hashtagArray[i].indexOf('#') === 0) {
-      evt.target.setCustomValidity('хеш-тег не может содержать только решётку');
-    }   else if (hashtagArray[i].length > 20) {
-      evt.target.setCustomValidity('максимальная длина одного хэш-тега 20 символов, включая решётку');
-    }   else if (isIdentically(hashtagArray[i], hashtagArray) && hashtagArray.length !== 1) {
-      evt.target.setCustomValidity('один и тот же хэш-тег не может быть использован дважды');
-    }   else {
-      evt.target.setCustomValidity('');
-  }
-}
-      return hashtagArray;
+        evt.target.setCustomValidity('Нельзя указать больше пяти хэш-тегов');
+      } else if (evt.target.value === '') {
+        evt.target.setCustomValidity('');
+      } else if (hashtagArray[i].indexOf(',') !== -1) {
+        evt.target.setCustomValidity('хэш-теги разделяются пробелами');
+      } else if (hashtagArray[i].indexOf('#') !== 0) {
+        evt.target.setCustomValidity('хэш-тег начинается с символа # (решётка)');
+      } else if (hashtagArray[i].length === 1 && hashtagArray[i].indexOf('#') === 0) {
+        evt.target.setCustomValidity('хеш-тег не может содержать только решётку');
+      } else if (hashtagArray[i].length > 20) {
+        evt.target.setCustomValidity('максимальная длина одного хэш-тега 20 символов, включая решётку');
+      } else if (isIdentically(hashtagArray[i], hashtagArray) && hashtagArray.length !== 1) {
+        evt.target.setCustomValidity('один и тот же хэш-тег не может быть использован дважды');
+      } else {
+        evt.target.setCustomValidity('');
+      }
     }
-  };
+    return hashtagArray;
+  }
+};
 
 main.removeChild(bigPictureBlock);
 
