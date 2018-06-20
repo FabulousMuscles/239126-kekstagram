@@ -36,6 +36,8 @@ var inputTarget;
 var renderedPicture;
 var effectsList = document.querySelector('.effects__list');
 
+var inputValue = document.querySelector('.img-upload__text');
+var textAreaValue = document.querySelector('.text__description');
 
 var fragment = document.createDocumentFragment();
 
@@ -80,6 +82,24 @@ var renderBigPicture = function (arrayObjects) {
   return bigPictureElement;
 };
 
+var textAreaValueFocusHandler = function () {
+  document.removeEventListener('keydown', popupKeydownHandler);
+};
+
+var textAreaValueBlurHandler = function () {
+  document.addEventListener('keydown', popupKeydownHandler);
+};
+
+var isIdentically = function (element, array) {
+  for (var i = 0; i < array.length; i++) {
+     if (element.toLowerCase() !== array[i].toLowerCase()) {
+
+      return false
+    }
+
+    return true;
+  }
+};
 
 var openPopup = function () {
   imgUpload.classList.remove('hidden');
@@ -179,8 +199,10 @@ var renderedPictureClickHandler = function (evt) {
 };
 
 var pictureMainBlockHandler = function (evt) {
-  for (var i = 0; i < pictures.length; i++) {
-    if (evt.target.src.includes(pictures[i].url)) {
+  if (evt.target.classList.contains('picture__img')) {
+    var elementTargetImg = evt.target.src;
+    for (var i = 0; i < pictures.length; i++) {
+    if (elementTargetImg.includes(pictures[i].url)) {
       bigPictureBlock.classList.remove('hidden');
       renderBigPicture(pictures[i]);
       renderedPicture = main.appendChild(renderBigPicture(pictures[i]));
@@ -188,8 +210,40 @@ var pictureMainBlockHandler = function (evt) {
   }
   document.addEventListener('keydown', galleryKeydownHandler);
   renderedPicture.addEventListener('click', renderedPictureClickHandler);
+  }
 
   return renderedPicture;
+};
+
+var textInputValueInputHandler = function (evt) {
+  evt.target.addEventListener('focus', function (evt) {
+  document.removeEventListener('keydown', galleryKeydownHandler);
+}, true);
+  if (evt.target.classList.contains('text__hashtags')) {
+    var hashtagArray = evt.target.value.split(' ');
+    for (var i = 0; i < hashtagArray.length; i++) {
+     var hashtagArrayElement = hashtagArray[i].toLowerCase;
+     if (hashtagArray.length > 5) {
+      evt.target.setCustomValidity('Нельзя указать больше пяти хэш-тегов');
+    } else if (evt.target.value === '') {
+      evt.target.setCustomValidity('');
+    } else if (hashtagArray[i].indexOf(',') !== -1) {
+      evt.target.setCustomValidity('хэш-теги разделяются пробелами');
+    } else if (hashtagArray[i].indexOf('#') !== 0) {
+      evt.target.setCustomValidity('хэш-тег начинается с символа # (решётка)');
+    } else if (hashtagArray[i].length === 1 && hashtagArray[i].indexOf('#') === 0) {
+      evt.target.setCustomValidity('хеш-тег не может содержать только решётку');
+    } else if (hashtagArray[i].length > 20) {
+      evt.target.setCustomValidity('максимальная длина одного хэш-тега 20 символов, включая решётку');
+    } else if (isIdentically(hashtagArray[i], hashtagArray) && hashtagArray.length !== 1) {
+      evt.target.setCustomValidity('один и тот же хэш-тег не может быть использован дважды');
+    } else {
+      evt.target.setCustomValidity('');
+  }
+}
+  return hashtagArray;
+}
+
 };
 
 main.removeChild(bigPictureBlock);
@@ -203,3 +257,9 @@ effectsList.addEventListener('focus', inputFocusHandler, true);
 pictureMainBlock.addEventListener('click', pictureMainBlockHandler, true);
 
 placeBlockPicturesHTML(fragment, pictures);
+
+inputValue.addEventListener('input', textInputValueInputHandler);
+
+textAreaValue.addEventListener('focus', textAreaValueFocusHandler);
+
+textAreaValue.addEventListener('blur', textAreaValueBlurHandler);
