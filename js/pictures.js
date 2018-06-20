@@ -202,9 +202,9 @@ var pictureMainBlockHandler = function (evt) {
     var elementTargetImg = evt.target.src;
     for (var i = 0; i < pictures.length; i++) {
       if (elementTargetImg.includes(pictures[i].url)) {
-          bigPictureBlock.classList.remove('hidden');
-          renderBigPicture(pictures[i]);
-          renderedPicture = main.appendChild(renderBigPicture(pictures[i]));
+        bigPictureBlock.classList.remove('hidden');
+        renderBigPicture(pictures[i]);
+        renderedPicture = main.appendChild(renderBigPicture(pictures[i]));
       }
     }
     document.addEventListener('keydown', galleryKeydownHandler);
