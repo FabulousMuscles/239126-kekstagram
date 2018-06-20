@@ -92,12 +92,11 @@ var textAreaValueBlurHandler = function () {
 
 var isIdentically = function (element, array) {
   for (var i = 0; i < array.length; i++) {
-     if (element.toLowerCase() !== array[i].toLowerCase()) {
+    if (element.toLowerCase() !== array[i].toLowerCase()) {
 
-      return false
+      return false;
     }
-
-    return true;
+      return true;
   }
 };
 
@@ -203,22 +202,19 @@ var pictureMainBlockHandler = function (evt) {
     var elementTargetImg = evt.target.src;
     for (var i = 0; i < pictures.length; i++) {
     if (elementTargetImg.includes(pictures[i].url)) {
-      bigPictureBlock.classList.remove('hidden');
-      renderBigPicture(pictures[i]);
-      renderedPicture = main.appendChild(renderBigPicture(pictures[i]));
+    bigPictureBlock.classList.remove('hidden');
+        renderBigPicture(pictures[i]);
+        renderedPicture = main.appendChild(renderBigPicture(pictures[i]));
+      }
     }
-  }
-  document.addEventListener('keydown', galleryKeydownHandler);
-  renderedPicture.addEventListener('click', renderedPictureClickHandler);
-  }
+    document.addEventListener('keydown', galleryKeydownHandler);
+    renderedPicture.addEventListener('click', renderedPictureClickHandler);
+    }
 
   return renderedPicture;
 };
 
 var textInputValueInputHandler = function (evt) {
-  evt.target.addEventListener('focus', function (evt) {
-  document.removeEventListener('keydown', galleryKeydownHandler);
-}, true);
   if (evt.target.classList.contains('text__hashtags')) {
     var hashtagArray = evt.target.value.split(' ');
     for (var i = 0; i < hashtagArray.length; i++) {
