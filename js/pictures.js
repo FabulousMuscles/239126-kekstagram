@@ -95,8 +95,9 @@ var isIdentically = function (element, array) {
     if (element.toLowerCase() !== array[i].toLowerCase()) {
 
       return false;
+    } else {
+      return true;
     }
-    return true;
   }
 };
 
