@@ -246,8 +246,8 @@ var textInputValueInputHandler = function (evt) {
         evt.target.setCustomValidity('');
       }
     }
-    return hashtagArray;
   }
+  return hashtagArray;
 };
 
 main.removeChild(bigPictureBlock);
