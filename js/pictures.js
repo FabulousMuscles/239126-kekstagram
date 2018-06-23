@@ -170,7 +170,7 @@ var toggleFiltres = function (evt) {
   return imgUploadPreviewFilterClass;
 };
 
-var scaleValueFilters = function (evt) {
+var scaleValueFilters = function () {
   if (imgUploadPreviewFilterClass) {
     if (inputTarget.value === 'chrome') {
       imgUploadPreviewFilterClass.style = 'filter: grayscale(' + 1 * (scaleValue.value / 100) + ')';
@@ -256,30 +256,30 @@ var textInputValueInputHandler = function (evt) {
   return hashtagArray;
 };
 /*Здесь код работы слайдера*/
-var scaleLineMousedownHandler = function (evt) {
+var scaleLineMousedownHandler = function () {
   var startCoords = 494;
 
   var scaleLineMousemoveHandler = function (moveEvt) {
-   moveEvt.preventDefault();
+    moveEvt.preventDefault();
 
-   var shift = startCoords - moveEvt.clientX;
-   scaleLevel.style.width = (scaleLine.offsetLeft - shift) + 'px';
-   if (shift < -430) {
-    scaleLevel.style.width = MAX_SCALE_WIDTH + 'px';
-  }
-  scalePin.style.left = scaleLevel.style.width;
-  scaleValue.value = Math.round((scaleLine.offsetLeft - shift) / (MAX_SCALE_WIDTH / 100));
-  scaleValueFilters();
-};
+    var shift = startCoords - moveEvt.clientX;
+    scaleLevel.style.width = (scaleLine.offsetLeft - shift) + 'px';
+    if (shift < -430) {
+      scaleLevel.style.width = MAX_SCALE_WIDTH + 'px';
+    }
+    scalePin.style.left = scaleLevel.style.width;
+    scaleValue.value = Math.round((scaleLine.offsetLeft - shift) / (MAX_SCALE_WIDTH / 100));
+    scaleValueFilters();
+  };
 
-var scalePinMouseUpHandler = function (upEvt) {
- upEvt.preventDefault();
+  var scalePinMouseUpHandler = function (upEvt) {
+   upEvt.preventDefault();
 
- scaleLine.removeEventListener('mousemove', scaleLineMousemoveHandler);
- scaleLine.removeEventListener('mouseup', scalePinMouseUpHandler);
-};
-scaleLine.addEventListener('mousemove', scaleLineMousemoveHandler);
-scaleLine.addEventListener('mouseup', scalePinMouseUpHandler);
+   scaleLine.removeEventListener('mousemove', scaleLineMousemoveHandler);
+   scaleLine.removeEventListener('mouseup', scalePinMouseUpHandler);
+  };
+  scaleLine.addEventListener('mousemove', scaleLineMousemoveHandler);
+  scaleLine.addEventListener('mouseup', scalePinMouseUpHandler);
 };
 
 main.removeChild(bigPictureBlock);
@@ -300,5 +300,5 @@ textAreaValue.addEventListener('focus', textAreaValueFocusHandler);
 
 textAreaValue.addEventListener('blur', textAreaValueBlurHandler);
 
-/*Вызываю функцию слайдера*/
+  /*Вызываю функцию слайдера*/
 scaleLine.addEventListener('mousedown', scaleLineMousedownHandler);
