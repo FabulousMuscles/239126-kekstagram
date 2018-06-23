@@ -255,7 +255,7 @@ var textInputValueInputHandler = function (evt) {
   }
   return hashtagArray;
 };
-/*Здесь код работы слайдера*/
+/* Здесь код работы слайдера */
 var scaleLineMousedownHandler = function () {
   var startCoords = 494;
 
@@ -273,10 +273,10 @@ var scaleLineMousedownHandler = function () {
   };
 
   var scalePinMouseUpHandler = function (upEvt) {
-   upEvt.preventDefault();
+    upEvt.preventDefault();
 
-   scaleLine.removeEventListener('mousemove', scaleLineMousemoveHandler);
-   scaleLine.removeEventListener('mouseup', scalePinMouseUpHandler);
+    scaleLine.removeEventListener('mousemove', scaleLineMousemoveHandler);
+    scaleLine.removeEventListener('mouseup', scalePinMouseUpHandler);
   };
   scaleLine.addEventListener('mousemove', scaleLineMousemoveHandler);
   scaleLine.addEventListener('mouseup', scalePinMouseUpHandler);
@@ -300,5 +300,5 @@ textAreaValue.addEventListener('focus', textAreaValueFocusHandler);
 
 textAreaValue.addEventListener('blur', textAreaValueBlurHandler);
 
-  /*Вызываю функцию слайдера*/
+/* Вызываю функцию слайдера */
 scaleLine.addEventListener('mousedown', scaleLineMousedownHandler);
