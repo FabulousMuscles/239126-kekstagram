@@ -4,7 +4,7 @@ var COMMENTS_ARRAY = ['Всё отлично!', 'В целом всё непло
 var DESCRIPTION_ARRAY = ['Тестим новую камеру!', 'Затусили с друзьями на море', 'Как же круто тут кормят', 'Отдыхаем...', 'Цените каждое мгновенье. Цените тех, кто рядом с вами и отгоняйте все сомненья. Не обижайте всех словами......', 'Вот это тачка!'];
 
 var ESC_KEYCODE = 27;
-
+var MAX_SCALE_WIDTH = 453;
 
 var renderArrayObject = function (quantity) {
   var arrayObjects = [];
@@ -38,11 +38,15 @@ var effectsList = document.querySelector('.effects__list');
 
 var inputValue = document.querySelector('.img-upload__text');
 var textAreaValue = document.querySelector('.text__description');
-var hashtagArray;
 
 var fragment = document.createDocumentFragment();
 
 var pictures = renderArrayObject(25);
+
+var scaleLine = document.querySelector('.scale__line');
+var scalePin = scaleLine.querySelector('.scale__pin');
+var scaleLevel = scaleLine.querySelector('.scale__level');
+var scaleValue = document.querySelector('.scale__value');
 
 var renderPictures = function (arrayObjects) {
   var pictureElement = pictureTemplate.cloneNode(true);
@@ -149,20 +153,24 @@ var inputChangeHandler = function (evt) {
 
 var toggleFiltres = function (evt) {
   var filterEffectButton = evt.target.nextElementSibling.firstElementChild;
-  if (imgUploadPreview.classList.length === 1) {
-    imgUploadPreview.classList.add(filterEffectButton.classList.item(1));
-  } else if (imgUploadPreview.classList.item(1) !== filterEffectButton.classList.item(1)) {
-    imgUploadPreview.classList.remove(imgUploadPreview.classList.item(1));
-    imgUploadPreview.style = '';
-    imgUploadPreview.classList.add(filterEffectButton.classList.item(1));
+  if (imgUploadPreview) {
+    scaleLevel.style.width = MAX_SCALE_WIDTH + 'px';
+    scalePin.style.left = scaleLevel.style.width;
+
+    if (imgUploadPreview.classList.length === 1) {
+      imgUploadPreview.classList.add(filterEffectButton.classList.item(1));
+    } else if (imgUploadPreview.classList.item(1) !== filterEffectButton.classList.item(1)) {
+      imgUploadPreview.classList.remove(imgUploadPreview.classList.item(1));
+      imgUploadPreview.style = '';
+      imgUploadPreview.classList.add(filterEffectButton.classList.item(1));
+    }
   }
   imgUploadPreviewFilterClass = imgUploadPreview;
 
   return imgUploadPreviewFilterClass;
 };
 
-var scalePinMouseupHandler = function (evt) {
-  var scaleValue = evt.target.parentElement.previousElementSibling;
+var scaleValueFilters = function (evt) {
   if (imgUploadPreviewFilterClass) {
     if (inputTarget.value === 'chrome') {
       imgUploadPreviewFilterClass.style = 'filter: grayscale(' + 1 * (scaleValue.value / 100) + ')';
@@ -192,9 +200,7 @@ var imgUploadClickHandler = function (evt) {
   var elementTarget = evt.target;
   if (elementTarget.id === 'upload-cancel') {
     closePopup();
-  } else if (elementTarget.classList.contains('scale__pin')) {
-    elementTarget.addEventListener('mouseup', scalePinMouseupHandler);
-  } if (elementTarget.name === 'effect') {
+  } else if (elementTarget.name === 'effect') {
     toggleFiltres(evt);
   }
 
@@ -226,7 +232,7 @@ var pictureMainBlockHandler = function (evt) {
 
 var textInputValueInputHandler = function (evt) {
   if (evt.target.classList.contains('text__hashtags')) {
-    hashtagArray = evt.target.value.split(' ');
+    var hashtagArray = evt.target.value.split(' ');
     for (var i = 0; i < hashtagArray.length; i++) {
       if (hashtagArray.length > 5) {
         evt.target.setCustomValidity('Нельзя указать больше пяти хэш-тегов');
@@ -249,6 +255,32 @@ var textInputValueInputHandler = function (evt) {
   }
   return hashtagArray;
 };
+/*Здесь код работы слайдера*/
+var scaleLineMousedownHandler = function (evt) {
+  var startCoords = 494;
+
+  var scaleLineMousemoveHandler = function (moveEvt) {
+   moveEvt.preventDefault();
+
+   var shift = startCoords - moveEvt.clientX;
+   scaleLevel.style.width = (scaleLine.offsetLeft - shift) + 'px';
+   if (shift < -430) {
+    scaleLevel.style.width = MAX_SCALE_WIDTH + 'px';
+  }
+  scalePin.style.left = scaleLevel.style.width;
+  scaleValue.value = Math.round((scaleLine.offsetLeft - shift) / (MAX_SCALE_WIDTH / 100));
+  scaleValueFilters();
+};
+
+var scalePinMouseUpHandler = function (upEvt) {
+ upEvt.preventDefault();
+
+ scaleLine.removeEventListener('mousemove', scaleLineMousemoveHandler);
+ scaleLine.removeEventListener('mouseup', scalePinMouseUpHandler);
+};
+scaleLine.addEventListener('mousemove', scaleLineMousemoveHandler);
+scaleLine.addEventListener('mouseup', scalePinMouseUpHandler);
+};
 
 main.removeChild(bigPictureBlock);
 
@@ -267,3 +299,6 @@ inputValue.addEventListener('input', textInputValueInputHandler);
 textAreaValue.addEventListener('focus', textAreaValueFocusHandler);
 
 textAreaValue.addEventListener('blur', textAreaValueBlurHandler);
+
+/*Вызываю функцию слайдера*/
+scaleLine.addEventListener('mousedown', scaleLineMousedownHandler);
