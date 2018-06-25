@@ -276,10 +276,10 @@ var scaleLineMousedownHandler = function () {
     upEvt.preventDefault();
 
     scaleLine.removeEventListener('mousemove', scaleLineMousemoveHandler);
-    scaleLine.removeEventListener('mouseup', scalePinMouseUpHandler);
+    scaleLine.parentElement.removeEventListener('mouseup', scalePinMouseUpHandler);
   };
   scaleLine.addEventListener('mousemove', scaleLineMousemoveHandler);
-  scaleLine.addEventListener('mouseup', scalePinMouseUpHandler);
+  scaleLine.parentElement.addEventListener('mouseup', scalePinMouseUpHandler);
 };
 
 main.removeChild(bigPictureBlock);
