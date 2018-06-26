@@ -123,6 +123,6 @@
   uploadFileInput.addEventListener('change', inputChangeHandler);
   imgUpload.addEventListener('click', imgUploadClickHandler);
   effectsList.addEventListener('focus', inputFocusHandler, true);
-scaleLine.addEventListener('mousedown', scaleLineMousedownHandler);
+  scaleLine.addEventListener('mousedown', scaleLineMousedownHandler);
 
 })();
