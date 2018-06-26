@@ -1,8 +1,7 @@
 'use strict';
-(function() {
+(function () {
   var currentInputValue = '';
   var inputTarget;
-  var imgUploadPreview;
   var effectsList = document.querySelector('.effects__list');
   var scaleLine = document.querySelector('.scale__line');
   var scaleValue = document.querySelector('.scale__value');
@@ -28,12 +27,6 @@ var openPopup = function () {
 var closePopup = function () {
   imgUpload.classList.add('hidden');
   document.removeEventListener('keydown', window.scaleFilter.popupKeydownHandler);
-};
-
-var popupKeydownHandler = function (evt) {
-  if (evt.keyCode === window.dataFile.ESC_KEYCODE) {
-    closePopup();
-  }
 };
 
 var inputChangeHandler = function (evt) {
@@ -109,7 +102,7 @@ var scaleLineMousedownHandler = function () {
     var shift = startCoords - moveEvt.clientX;
     scaleLevel.style.width = (scaleLine.offsetLeft - shift) + 'px';
     if (shift < -430) {
-      window.scaleFilters.scaleLevel.style.width = window.dataFile.MAX_SCALE_WIDTH + 'px';
+      scaleLevel.style.width = window.dataFile.MAX_SCALE_WIDTH + 'px';
     }
     scalePin.style.left = scaleLevel.style.width;
     scaleValue.value = Math.round((scaleLine.offsetLeft - shift) / (window.dataFile.MAX_SCALE_WIDTH / 100));

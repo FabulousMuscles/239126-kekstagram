@@ -52,8 +52,8 @@
             renderedPicture = window.gallery.main.appendChild(renderBigPicture(window.gallery.pictures[i]));
           }
         }
-        document.addEventListener('keydown',galleryKeydownHandler);
-        renderedPicture.addEventListener('click',renderedPictureClickHandler);
+        document.addEventListener('keydown', galleryKeydownHandler);
+        renderedPicture.addEventListener('click', renderedPictureClickHandler);
       }
 
       return renderedPicture;

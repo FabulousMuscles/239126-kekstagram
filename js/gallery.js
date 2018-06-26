@@ -6,7 +6,6 @@
     main: document.querySelector('main')
   };
 
-  var elementComment = document.querySelectorAll('.social__comment');
   var pictureMainBlock = document.querySelector('.pictures');
   var pictureTemplate = document.querySelector('#picture')
   .content
