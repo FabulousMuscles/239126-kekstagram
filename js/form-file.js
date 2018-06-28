@@ -1,5 +1,6 @@
 'use strict';
 (function () {
+  var form = document.querySelector('.img-upload__form');
   var inputValue = document.querySelector('.img-upload__text');
   var textAreaValue = document.querySelector('.text__description');
 
@@ -61,5 +62,13 @@
   textAreaValue.addEventListener('focus', textAreaValueFocusHandler);
 
   textAreaValue.addEventListener('blur', textAreaValueBlurHandler);
+
+  form.addEventListener('submit', function (evt) {
+    window.backend.upload(new FormData(form), function (response) {
+      window.scaleFilter.imgUpload.classList.add('hidden');
+    });
+    console.log(FormData());
+    evt.preventDefault();
+  });
 
 })();

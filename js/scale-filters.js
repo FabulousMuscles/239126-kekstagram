@@ -9,7 +9,6 @@
   var scaleLevel = scaleLine.querySelector('.scale__level');
   var uploadSelectImage = document.querySelector('#upload-select-image');
   var uploadFileInput = uploadSelectImage.querySelector('#upload-file');
-  var imgUpload = uploadSelectImage.querySelector('.img-upload__overlay');
   var imgUploadPreview = uploadSelectImage.querySelector('.img-upload__preview');
   var imgUploadPreviewFilterClass;
   window.scaleFilter = {
@@ -17,15 +16,16 @@
       if (evt.keyCode === window.dataFile.ESC_KEYCODE) {
         closePopup();
       }
-    }
+    },
+    imgUpload: uploadSelectImage.querySelector('.img-upload__overlay')
   };
   var openPopup = function () {
-    imgUpload.classList.remove('hidden');
+    window.scaleFilter.imgUpload.classList.remove('hidden');
     document.addEventListener('keydown', window.scaleFilter.popupKeydownHandler);
   };
 
   var closePopup = function () {
-    imgUpload.classList.add('hidden');
+    window.scaleFilter.imgUpload.classList.add('hidden');
     document.removeEventListener('keydown', window.scaleFilter.popupKeydownHandler);
   };
 
@@ -121,7 +121,7 @@
   };
 
   uploadFileInput.addEventListener('change', inputChangeHandler);
-  imgUpload.addEventListener('click', imgUploadClickHandler);
+  window.scaleFilter.imgUpload.addEventListener('click', imgUploadClickHandler);
   effectsList.addEventListener('focus', inputFocusHandler, true);
   scaleLine.addEventListener('mousedown', scaleLineMousedownHandler);
 
