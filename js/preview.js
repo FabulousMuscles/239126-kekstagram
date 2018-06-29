@@ -71,7 +71,7 @@
       }
     },
     errorBlock: function (errorMessage) {
-    var errorElement = document.createElement('div');
+      var errorElement = document.createElement('div');
       errorElement.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
       errorElement.style.position = 'absolute';
       errorElement.style.left = 0;
