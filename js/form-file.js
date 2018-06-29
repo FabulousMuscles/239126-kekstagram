@@ -57,6 +57,10 @@
     return hashtagArray;
   };
 
+  var formAddClassList = function () {
+      window.scaleFilter.imgUpload.classList.add('hidden');
+  };
+
   inputValue.addEventListener('input', textInputValueInputHandler);
 
   textAreaValue.addEventListener('focus', textAreaValueFocusHandler);
@@ -64,10 +68,7 @@
   textAreaValue.addEventListener('blur', textAreaValueBlurHandler);
 
   form.addEventListener('submit', function (evt) {
-    window.backend.upload(new FormData(form), function (response) {
-      window.scaleFilter.imgUpload.classList.add('hidden');
-    });
-    console.log(FormData());
+    window.backend.upload(new FormData(form), formAddClassList, window.preview.errorBlock);
     evt.preventDefault();
   });
 
