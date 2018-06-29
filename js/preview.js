@@ -20,7 +20,7 @@
     var elementComment = bigPictureElement.querySelectorAll('.social__comment');
     for (var i = 0; i < elementComment.length; i++) {
       elementCommentsContainer.removeChild(elementComment[i]);
-     }
+    }
     for (var j = 0; j < arrayObjects.comments.length; j++) {
       var elementCommentFragment = elementComment[0].cloneNode(true);
       elementCommentFragment.querySelector('img').src = 'img/avatar-' + Math.floor(Math.random() * 6 + 1) + '.svg';
@@ -28,7 +28,7 @@
       elementCommentsContainer.appendChild(elementCommentFragment);
     }
     return elementCommentFragment;
-};
+  };
 
   var closeGallery = function () {
     placedRenderedPicture.classList.add('hidden');
@@ -47,27 +47,14 @@
     }
   };
 
-  var renderDataPictures = function(arrayObjects) {
-        window.gallery.bigPictureBlock.classList.remove('hidden');
-        console.log(arrayObjects);
-        var renderedPicture = renderBigPicture(arrayObjects[index]);
-        placedRenderedPicture = window.gallery.main.appendChild(renderedPicture);
-        document.addEventListener('keydown', galleryKeydownHandler);
-        placedRenderedPicture.addEventListener('click', placedRenderedPictureClickHandler);
+  var renderDataPictures = function (arrayObjects) {
+    window.gallery.bigPictureBlock.classList.remove('hidden');
+    var renderedPicture = renderBigPicture(arrayObjects[index]);
+    placedRenderedPicture = window.gallery.main.appendChild(renderedPicture);
+    document.addEventListener('keydown', galleryKeydownHandler);
+    placedRenderedPicture.addEventListener('click', placedRenderedPictureClickHandler);
 
-        return placedRenderedPicture;
-  };
-
-  var errorBlock = function (errorMessage) {
-    var errorElement = document.createElement('div');
-    errorElement.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
-    errorElement.style.position = 'absolute';
-    errorElement.style.left = 0;
-    errorElement.style.right = 0;
-    errorElement.style.fontSize = '30px';
-
-    errorElement.textContent = errorMessage;
-    document.body.insertAdjacentElement('afterbegin', errorElement);
+    return placedRenderedPicture;
   };
 
   window.preview = {
@@ -85,14 +72,14 @@
     },
     errorBlock: function (errorMessage) {
     var errorElement = document.createElement('div');
-    errorElement.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
-    errorElement.style.position = 'absolute';
-    errorElement.style.left = 0;
-    errorElement.style.right = 0;
-    errorElement.style.fontSize = '30px';
+      errorElement.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
+      errorElement.style.position = 'absolute';
+      errorElement.style.left = 0;
+      errorElement.style.right = 0;
+      errorElement.style.fontSize = '30px';
 
-    errorElement.textContent = errorMessage;
-    document.body.insertAdjacentElement('afterbegin', errorElement);
-  }
+      errorElement.textContent = errorMessage;
+      document.body.insertAdjacentElement('afterbegin', errorElement);
+    }
   };
 })();

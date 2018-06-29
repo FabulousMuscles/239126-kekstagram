@@ -58,7 +58,7 @@
   };
 
   var formAddClassList = function () {
-      window.scaleFilter.imgUpload.classList.add('hidden');
+    window.scaleFilter.imgUpload.classList.add('hidden');
   };
 
   inputValue.addEventListener('input', textInputValueInputHandler);
