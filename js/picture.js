@@ -2,8 +2,8 @@
 (function () {
 
   window.picture = {
-    renderPictures: function (arrayObjects, templateExample) {
-      var pictureElement = templateExample.cloneNode(true);
+    renderPictures: function (arrayObjects) {
+      var pictureElement = window.gallery.pictureTemplate.cloneNode(true);
 
       pictureElement.querySelector('.picture__img').src = arrayObjects.url;
       pictureElement.querySelector('.picture__stat--comments').textContent = arrayObjects.comments.length;
@@ -11,11 +11,12 @@
 
       return pictureElement;
     },
-    placeBlockPicturesHTML: function (documentFragment, arrayObjects, pictureBlock, templateExample) {
+    placeBlockPicturesHTML: function (arrayObjects) {
+      var fragment = document.createDocumentFragment();
       for (var i = 0; i < arrayObjects.length; i++) {
-        documentFragment.appendChild(window.picture.renderPictures(arrayObjects[i], templateExample));
+        fragment.appendChild(window.picture.renderPictures(arrayObjects[i]));
       }
-      return pictureBlock.appendChild(documentFragment);
+      return window.gallery.pictureMainBlock.appendChild(fragment);
     }
   };
 })();
