@@ -15,5 +15,5 @@
 
   window.backend.load(window.picture.placeBlockPicturesHTML, window.preview.errorBlock);
 
-  window.gallery.pictureMainBlock.addEventListener('click', window.preview.pictureMainBlockHandler, true);
+  window.gallery.pictureMainBlock.addEventListener('click', window.preview.pictureMainBlockHandler);
 })();
