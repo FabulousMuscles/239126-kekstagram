@@ -21,7 +21,7 @@
       return window.gallery.pictureMainBlock.appendChild(fragment);
     },
     removeBlockPicturesHTML: function () {
-      var pictureLinks = document.querySelectorAll('.picture__link')
+      var pictureLinks = document.querySelectorAll('.picture__link');
       for (var i = 0; i < pictureLinks.length; i++) {
         window.gallery.pictureMainBlock.removeChild(pictureLinks[i]);
       }
