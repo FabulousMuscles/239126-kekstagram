@@ -17,6 +17,7 @@
       return arrayObjects;
     },
     ESC_KEYCODE: 27,
-    MAX_SCALE_WIDTH: 453
+    MAX_SCALE_WIDTH: 453,
+    downloadedObjects: []
   };
 })();

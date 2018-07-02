@@ -12,11 +12,19 @@
       return pictureElement;
     },
     placeBlockPicturesHTML: function (arrayObjects) {
+      var imgFilters = document.querySelector('.img-filters');
+      imgFilters.classList.remove('img-filters--inactive');
       var fragment = document.createDocumentFragment();
       for (var i = 0; i < arrayObjects.length; i++) {
         fragment.appendChild(window.picture.renderPictures(arrayObjects[i]));
       }
       return window.gallery.pictureMainBlock.appendChild(fragment);
+    },
+    removeBlockPicturesHTML: function () {
+      var pictureLinks = document.querySelectorAll('.picture__link');
+      for (var i = 0; i < pictureLinks.length; i++) {
+        window.gallery.pictureMainBlock.removeChild(pictureLinks[i]);
+      }
     }
   };
 })();
