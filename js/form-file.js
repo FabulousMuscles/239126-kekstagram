@@ -2,7 +2,6 @@
 (function () {
   var form = document.querySelector('.img-upload__form');
   var inputValue = document.querySelector('.img-upload__text');
-  var textAreaValue = document.querySelector('.text__description');
   var textInput = document.querySelector('.img-upload__text');
 
   var textInputFocusHandler = function () {
@@ -40,34 +39,34 @@
         switch (true) {
           case target.value === '':
           target.setCustomValidity('');
-          break;
-          case hashtagArray[i].length === 0 && hashtagArray[i].indexOf('') === 0:
+            break;
+            case hashtagArray[i].length === 0 && hashtagArray[i].indexOf('') === 0:
           target.setCustomValidity('');
-          break;
-          case hashtagArray.length > 5:
+            break;
+            case hashtagArray.length > 5:
           target.setCustomValidity('Нельзя указать больше пяти хэш-тегов');
-          break;
-          case hashtagArray[i].indexOf(',') !== -1:
+            break;
+            case hashtagArray[i].indexOf(',') !== -1:
           target.setCustomValidity('хэш-теги разделяются пробелами');
-          break;
-          case hashtagArray[i].indexOf('#') !== 0:
+            break;
+            case hashtagArray[i].indexOf('#') !== 0:
           target.setCustomValidity('хэш-тег начинается с символа # (решётка)');
-          break;
-          case hashtagArray[i].length === 1 && hashtagArray[i].indexOf('#') === 0:
+            break;
+            case hashtagArray[i].length === 1 && hashtagArray[i].indexOf('#') === 0:
           target.setCustomValidity('хеш-тег не может содержать только решётку');
-          break;
-          case isMoreThanOneHashtagSymbol(hashtagArray[i]):
+            break;
+            case isMoreThanOneHashtagSymbol(hashtagArray[i]):
           target.setCustomValidity('один хеш-тег может содержать только одну решётку');
-          break;
-          case hashtagArray[i].length > 20:
+            break;
+            case hashtagArray[i].length > 20:
           target.setCustomValidity('максимальная длина одного хэш-тега 20 символов, включая решётку');
-          break;
-          case !isIdentically(hashtagArray[i], hashtagArray) && hashtagArray.length !== 1:
+            break;
+            case !isIdentically(hashtagArray[i], hashtagArray) && hashtagArray.length !== 1:
           target.setCustomValidity('один и тот же хэш-тег не может быть использован дважды');
-          break;
-          default:
+            break;
+            default:
           target.setCustomValidity('');
-        }
+          }
       }
     }
     return hashtagArray;

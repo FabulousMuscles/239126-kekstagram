@@ -48,15 +48,16 @@
     if (target.tagName === 'INPUT') {
       inputTarget = target;
     }
-     return inputTarget;
+    return inputTarget;
   };
 
   var toggleFiltres = function (evt) {
     var target = evt.target;
+    var filterEffectButton;
     if (target.tagName === 'INPUT') {
-      var filterEffectButton = target.nextElementSibling.firstElementChild;
+      filterEffectButton = target.nextElementSibling.firstElementChild;
     } else if (target.tagName === 'LABEL') {
-      var filterEffectButton = target.firstElementChild;
+      filterEffectButton = target.firstElementChild;
     }
 
     scaleLevel.style.width = window.dataFile.MAX_SCALE_WIDTH + '%';

@@ -36,8 +36,6 @@
         if (xhr.status === 200) {
           var imgFilters = document.querySelector('.img-filters');
           imgFilters.classList.remove('img-filters--inactive');
-          var imgFilters = document.querySelector('.img-filters');
-          imgFilters.classList.remove('img-filters--inactive');
           window.dataFile.downloadedObjects = xhr.response.slice();
           onLoad(xhr.response);
         } else {

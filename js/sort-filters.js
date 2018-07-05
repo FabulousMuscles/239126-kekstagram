@@ -48,28 +48,28 @@
       activeButton = target;
     } switch (target.id) {
       case 'filter-popular':
-      var sortByPopularWrapper = function () {
-        return window.picture.placeBlockPicturesHTML(window.dataFile.downloadedObjects);
-      };
+        var sortByPopularWrapper = function () {
+          return window.picture.placeBlockPicturesHTML(window.dataFile.downloadedObjects);
+        };
 
-      debounce(window.picture.removeBlockPicturesHTML, sortByPopularWrapper);
-      break;
+        debounce(window.picture.removeBlockPicturesHTML, sortByPopularWrapper);
+        break;
       case 'filter-new':
-      var sortByNewWrapper = function () {
-        return window.picture.placeBlockPicturesHTML(sortByNew(window.dataFile.downloadedObjects));
-      };
+        var sortByNewWrapper = function () {
+          return window.picture.placeBlockPicturesHTML(sortByNew(window.dataFile.downloadedObjects));
+        };
 
-      debounce(window.picture.removeBlockPicturesHTML, sortByNewWrapper);
-      break;
+        debounce(window.picture.removeBlockPicturesHTML, sortByNewWrapper);
+        break;
       case 'filter-discussed':
-      var sortByTopDiscussedWrapper = function () {
-        return window.picture.placeBlockPicturesHTML(sortByTopDiscussed(window.dataFile.downloadedObjects));
-      };
+        var sortByTopDiscussedWrapper = function () {
+          return window.picture.placeBlockPicturesHTML(sortByTopDiscussed(window.dataFile.downloadedObjects));
+        };
 
-      debounce(window.picture.removeBlockPicturesHTML, sortByTopDiscussedWrapper);
-      break;
+        debounce(window.picture.removeBlockPicturesHTML, sortByTopDiscussedWrapper);
+        break;
       default:
-      throw new Error('Неизвестный фильтр');
+        throw new Error('Неизвестный фильтр');
     }
   };
 

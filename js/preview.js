@@ -59,13 +59,14 @@
   window.preview = {
     pictureMainBlockHandler: function (evt) {
       var target = evt.target;
+      var elementTargetImg;
       document.body.classList.add('modal-open');
       if (target.classList.contains('picture__img') || target.classList.contains('picture__link')) {
         evt.preventDefault();
         if (target.classList.contains('picture__img')) {
-          var elementTargetImg = target.src;
+          elementTargetImg = target.src;
         } else if (target.classList.contains('picture__link')) {
-          var elementTargetImg = target.firstElementChild.src;
+          elementTargetImg = target.firstElementChild.src;
         }
         for (var i = 0; i < window.dataFile.downloadedObjects.length; i++) {
           if (elementTargetImg.includes(window.dataFile.downloadedObjects[i].url)) {
@@ -75,19 +76,19 @@
         }
       }
     },
-    errorBlock: function (errorMessage) {
+    errorBlock: function () {
       var errorElement = document.querySelector('#picture')
     .content
-    .querySelector('.img-upload__message--error');
-    var fragment = document.createDocumentFragment();
-    errorElement.classList.remove('hidden');
-    fragment.appendChild(errorElement);
-    window.gallery.main.appendChild(fragment);
+      .querySelector('.img-upload__message--error');
+      var fragment = document.createDocumentFragment();
+      errorElement.classList.remove('hidden');
+      fragment.appendChild(errorElement);
+    window.gallery.main.appendChild (fragment);
     },
     pictureMainBlockKeydownHandler: function(evt) {
-      if (evt.keyCode ===  window.dataFile.ENTER_KEYCODE) {
+      if (evt.keyCode === window.dataFile.ENTER_KEYCODE) {
         window.preview.pictureMainBlockHandler;
+      }
     }
-    }
-};
+  };
 })();
