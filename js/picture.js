@@ -12,8 +12,6 @@
       return pictureElement;
     },
     placeBlockPicturesHTML: function (arrayObjects) {
-      var imgFilters = document.querySelector('.img-filters');
-      imgFilters.classList.remove('img-filters--inactive');
       var fragment = document.createDocumentFragment();
       for (var i = 0; i < arrayObjects.length; i++) {
         fragment.appendChild(window.picture.renderPictures(arrayObjects[i]));
