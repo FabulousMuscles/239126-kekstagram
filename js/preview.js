@@ -8,6 +8,8 @@
     bigPictureElement.querySelector('.big-picture__img').querySelector('img').src = arrayObjects.url;
     bigPictureElement.querySelector('.likes-count').textContent = arrayObjects.likes;
     bigPictureElement.querySelector('.comments-count').textContent = arrayObjects.comments.length;
+    bigPictureElement.querySelector('.social__comment-count').classList.add('visually-hidden');
+    bigPictureElement.querySelector('.social__loadmore').classList.add('visually-hidden');
     renderComments(arrayObjects);
     return bigPictureElement;
   };
@@ -18,13 +20,15 @@
     for (var i = 0; i < elementComment.length; i++) {
       elementCommentsContainer.removeChild(elementComment[i]);
     }
-    for (var j = 0; j < 5; j++) {
+    for (var j = 0; j < arrayObjects.comments.length; j++) {
       var elementCommentFragment = elementComment[0].cloneNode(true);
       elementCommentFragment.querySelector('img').src = 'img/avatar-' + Math.floor(Math.random() * 6 + 1) + '.svg';
       elementCommentFragment.querySelector('.social__text').textContent = arrayObjects.comments[j];
       elementCommentsContainer.appendChild(elementCommentFragment);
+      if (j > 5) {
+        return;
+      }
     }
-    return elementCommentFragment;
   };
 
   var closeGallery = function () {
