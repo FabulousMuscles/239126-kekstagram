@@ -83,11 +83,11 @@
       var fragment = document.createDocumentFragment();
       errorElement.classList.remove('hidden');
       fragment.appendChild(errorElement);
-    window.gallery.main.appendChild (fragment);
+      window.gallery.main.appendChild(fragment);
     },
-    pictureMainBlockKeydownHandler: function(evt) {
+    pictureMainBlockKeydownHandler: function (evt) {
       if (evt.keyCode === window.dataFile.ENTER_KEYCODE) {
-        window.preview.pictureMainBlockHandler;
+        window.preview.pictureMainBlockHandler();
       }
     }
   };

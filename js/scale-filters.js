@@ -119,17 +119,17 @@
     var imgResize = imgUploadPreview.querySelector('img');
     if (target.classList.contains('resize__control--minus')) {
       resizeControlValue.value = resizeControlValue.value.replace('%', '');
-      resizeControlValue.value = Number.parseInt(resizeControlValue.value) - (SCALE_PERCENTAGE / 4) + '%';
-      if (Number.parseInt(resizeControlValue.value.replace('%', '')) < 0) {
+      resizeControlValue.value = Number(resizeControlValue.value) - (SCALE_PERCENTAGE / 4) + '%';
+      if (Number(resizeControlValue.value.replace('%', '')) < 0) {
         resizeControlValue.value = 0 + '%';
       }
     } else if (target.classList.contains('resize__control--plus')) {
       resizeControlValue.value = resizeControlValue.value.replace('%', '');
-      resizeControlValue.value = Number.parseInt(resizeControlValue.value) + (SCALE_PERCENTAGE / 4) + '%';
-      if (Number.parseInt(resizeControlValue.value.replace('%', '')) > SCALE_PERCENTAGE) {
+      resizeControlValue.value = Number(resizeControlValue.value) + (SCALE_PERCENTAGE / 4) + '%';
+      if (Number(resizeControlValue.value.replace('%', '')) > SCALE_PERCENTAGE) {
         resizeControlValue.value = SCALE_PERCENTAGE + '%';
       }
-    } imgResize.style = 'transform: scale(' + (Number.parseInt(resizeControlValue.value.replace('%', '')) / SCALE_PERCENTAGE) + ')';
+    } imgResize.style = 'transform: scale(' + (Number(resizeControlValue.value.replace('%', '')) / SCALE_PERCENTAGE) + ')';
 
     return resizeControlValue;
   };
