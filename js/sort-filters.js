@@ -1,7 +1,8 @@
 'use strict';
 (function () {
+  var DEBOUNCE_INTERVAL = 300;
   var imgFiltersForm = document.querySelector('.img-filters__form');
-
+  var lastTimeout;
   var shuffleArray = function (array) {
     var j;
     var temp;
@@ -12,7 +13,16 @@
       array[i] = temp;
     }
     return array;
+  };
 
+  var debounce = function (funRemovePic, funRenderPic) {
+    if (lastTimeout) {
+      window.clearTimeout(lastTimeout);
+    }
+    lastTimeout = window.setTimeout(function () {
+      funRemovePic();
+      funRenderPic();
+    }, DEBOUNCE_INTERVAL);
   };
 
   var sortByTopDiscussed = function (sortedArray) {
@@ -20,13 +30,13 @@
     .sort(function (a, b) {
       return b.comments.length - a.comments.length;
     });
-    window.picture.placeBlockPicturesHTML(sortedByTopObjects);
+    return sortedByTopObjects;
   };
 
   var sortByNew = function (sortedArray) {
     var sortedByNewObjects = sortedArray.slice();
     sortedByNewObjects = shuffleArray(sortedByNewObjects).slice(15);
-    window.picture.placeBlockPicturesHTML(sortedByNewObjects);
+    return sortedByNewObjects;
   };
 
   var imgFiltersFormClickHandler = function (evt) {
@@ -38,16 +48,25 @@
       activeButton = target;
     } switch (target.id) {
       case 'filter-popular':
-        window.picture.removeBlockPicturesHTML();
-        window.picture.placeBlockPicturesHTML(window.dataFile.downloadedObjects);
+        var sortByPopularWrapper = function () {
+          return window.picture.placeBlockPicturesHTML(window.dataFile.downloadedObjects);
+        };
+
+        debounce(window.picture.removeBlockPicturesHTML, sortByPopularWrapper);
         break;
       case 'filter-new':
-        window.picture.removeBlockPicturesHTML();
-        sortByNew(window.dataFile.downloadedObjects);
+        var sortByNewWrapper = function () {
+          return window.picture.placeBlockPicturesHTML(sortByNew(window.dataFile.downloadedObjects));
+        };
+
+        debounce(window.picture.removeBlockPicturesHTML, sortByNewWrapper);
         break;
       case 'filter-discussed':
-        window.picture.removeBlockPicturesHTML();
-        sortByTopDiscussed(window.dataFile.downloadedObjects);
+        var sortByTopDiscussedWrapper = function () {
+          return window.picture.placeBlockPicturesHTML(sortByTopDiscussed(window.dataFile.downloadedObjects));
+        };
+
+        debounce(window.picture.removeBlockPicturesHTML, sortByTopDiscussedWrapper);
         break;
       default:
         throw new Error('Неизвестный фильтр');

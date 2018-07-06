@@ -1,7 +1,6 @@
 'use strict';
 (function () {
   window.gallery = {
-    pictures: window.dataFile.renderArrayObject(25),
     bigPictureBlock: document.querySelector('.big-picture'),
     main: document.querySelector('main'),
     pictureMainBlock: document.querySelector('.pictures'),
@@ -16,4 +15,6 @@
   window.backend.load(window.picture.placeBlockPicturesHTML, window.preview.errorBlock);
 
   window.gallery.pictureMainBlock.addEventListener('click', window.preview.pictureMainBlockHandler);
+
+  window.gallery.pictureMainBlock.addEventListener('keydown', window.preview.pictureMainBlockKeydownHandler);
 })();
