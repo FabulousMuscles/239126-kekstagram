@@ -70,10 +70,10 @@
       imgUploadPreview.classList.add(filterEffectButton.classList.item(1));
     }
 
-    if (!imgUploadPreview.classList.contains('effects__preview--none') || scaleWrapper.classList.contains('hidden')) {
-      scaleWrapper.classList.remove('hidden');
-    } else if (imgUploadPreview.classList.contains('effects__preview--none')) {
+    if (imgUploadPreview.classList.contains('effects__preview--none')) {
       scaleWrapper.classList.add('hidden');
+    } else if (!imgUploadPreview.classList.contains('effects__preview--none') || scaleWrapper.classList.contains('hidden')) {
+      scaleWrapper.classList.remove('hidden');
     }
 
     imgUploadPreviewFilterClass = imgUploadPreview;
