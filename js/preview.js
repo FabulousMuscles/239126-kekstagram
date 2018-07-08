@@ -1,5 +1,6 @@
 'use strict';
 (function () {
+  var MAX_VISIBLE_COMMENTS_NUMBER = 5;
   var index;
   var placedRenderedPicture;
   var bigPictureElement;
@@ -25,14 +26,14 @@
       elementCommentFragment.querySelector('img').src = 'img/avatar-' + Math.floor(Math.random() * 6 + 1) + '.svg';
       elementCommentFragment.querySelector('.social__text').textContent = arrayObjects.comments[j];
       elementCommentsContainer.appendChild(elementCommentFragment);
-      if (j > 5) {
+      if (j > MAX_VISIBLE_COMMENTS_NUMBER) {
         return;
       }
     }
   };
 
   var closeGallery = function () {
-    document.body.classList.remove('modal-open');
+    document.body.removeAttribute('class');
     window.gallery.main.removeChild(bigPictureElement);
     document.removeEventListener('keydown', galleryKeydownHandler);
   };
@@ -64,9 +65,9 @@
     pictureMainBlockHandler: function (evt) {
       var target = evt.target;
       var elementTargetImg;
-      document.body.classList.add('modal-open');
       if (target.classList.contains('picture__img') || target.classList.contains('picture__link')) {
         evt.preventDefault();
+        document.body.classList.add('modal-open');
         if (target.classList.contains('picture__img')) {
           elementTargetImg = target.src;
         } else if (target.classList.contains('picture__link')) {
@@ -80,18 +81,31 @@
         }
       }
     },
-    errorBlock: function () {
+    errorBlockUploadFile: function () {
+      var imgUploadWrapper = document.querySelector('.img-upload__wrapper');
       var errorElement = document.querySelector('#picture')
     .content
       .querySelector('.img-upload__message--error');
       var fragment = document.createDocumentFragment();
+      window.scaleFilter.imgUpload.classList.add('hidden');
       errorElement.classList.remove('hidden');
       fragment.appendChild(errorElement);
       window.gallery.main.appendChild(fragment);
     },
+    errorBlockLoadFile: function (errorMessage) {
+      var errorElement = document.createElement('div');
+      errorElement.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
+      errorElement.style.position = 'absolute';
+      errorElement.style.left = 0;
+      errorElement.style.right = 0;
+      errorElement.style.fontSize = '30px';
+
+      errorElement.textContent = errorMessage;
+      document.body.insertAdjacentElement('afterbegin', errorElement);
+    },
     pictureMainBlockKeydownHandler: function (evt) {
       if (evt.keyCode === window.dataFile.ENTER_KEYCODE) {
-        window.preview.pictureMainBlockHandler();
+        window.preview.pictureMainBlockHandler(evt);
       }
     }
   };

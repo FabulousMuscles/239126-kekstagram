@@ -78,7 +78,7 @@
   };
 
   var formSubmitHandler = function (evt) {
-    window.backend.upload(new FormData(form), formAddClassList, window.preview.errorBlock);
+    window.backend.upload(new FormData(form), formAddClassList, window.preview.errorBlockUploadFile);
     evt.preventDefault();
   };
 

@@ -12,7 +12,7 @@
   window.gallery.main.removeChild(window.gallery.bigPictureBlock);
 
 
-  window.backend.load(window.picture.placeBlockPicturesHTML, window.preview.errorBlock);
+  window.backend.load(window.picture.placeBlockPicturesHTML, window.preview.errorBlockLoadFile);
 
   window.gallery.pictureMainBlock.addEventListener('click', window.preview.pictureMainBlockHandler);
 
