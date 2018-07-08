@@ -82,7 +82,6 @@
       }
     },
     errorBlockUploadFile: function () {
-      var imgUploadWrapper = document.querySelector('.img-upload__wrapper');
       var errorElement = document.querySelector('#picture')
     .content
       .querySelector('.img-upload__message--error');

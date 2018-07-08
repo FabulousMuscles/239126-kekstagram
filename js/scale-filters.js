@@ -4,7 +4,6 @@
 
   var resizeControlValue = document.querySelector('.resize__control--value');
   resizeControlValue.value = MAX_VALUE + '%';
-  var currentInputValue = '';
   var inputTarget;
   var effectsList = document.querySelector('.effects__list');
   var scaleWrapper = document.querySelector('.img-upload__scale');
