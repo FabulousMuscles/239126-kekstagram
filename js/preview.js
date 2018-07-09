@@ -39,7 +39,6 @@
   };
 
   var renderComments = function () {
-    var totalCommentsCount = bigPictureElement.querySelector('.comments-count');
     var commentsCount = bigPictureElement.querySelector('.social__comment-count');
 
     for (var i = visibleCommentCount; i < window.dataFile.downloadedObjects[index].comments.length; i++) {

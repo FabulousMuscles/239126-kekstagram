@@ -36,7 +36,7 @@
       imgPreview.removeAttribute('class');
 
       if (imgPreview.hasAttribute('style')) {
-      imgPreview.removeAttribute('style');
+        imgPreview.removeAttribute('style');
       }
     }
     window.scaleFilter.imgUpload.classList.remove('hidden');
