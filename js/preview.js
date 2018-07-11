@@ -103,8 +103,8 @@
     if (target === errorLinks.firstElementChild) {
       window.backend.upload(new FormData(window.formFile.form), errorLinksRemoveElement, window.preview.errorBlockUploadFile);
     } else if (target === errorLinks.lastElementChild) {
-        errorLinksRemoveElement();
-      }
+      errorLinksRemoveElement();
+    }
   };
 
   window.preview = {
@@ -129,21 +129,21 @@
     },
     errorBlockUploadFile: function (xhrdata) {
       if (!placedErrorElement) {
-         var errorElement = document.querySelector('#picture')
+        var errorElement = document.querySelector('#picture')
     .content
       .querySelector('.img-upload__message--error');
-      var fragment = document.createDocumentFragment();
-      placedErrorElement = errorElement.cloneNode(true);
-      fragment.appendChild(placedErrorElement);
-      document.body.insertBefore(fragment, window.gallery.main);
-      placedErrorElement.classList.remove('hidden');
-      errorLinks = placedErrorElement.querySelector('.error__links').cloneNode(true);
-      var errorStatus = document.querySelector('.error');
-      errorStatus.textContent = xhrdata;
-      errorStatus.appendChild(errorLinks);
-      errorStatus.style = 'z-index: 99';
-      errorStatus.style.position = 'fixed';
-      errorLinks.addEventListener('click', errorLinksClickHandler);
+        var fragment = document.createDocumentFragment();
+        placedErrorElement = errorElement.cloneNode(true);
+        fragment.appendChild(placedErrorElement);
+        document.body.insertBefore(fragment, window.gallery.main);
+        placedErrorElement.classList.remove('hidden');
+        errorLinks = placedErrorElement.querySelector('.error__links').cloneNode(true);
+        var errorStatus = document.querySelector('.error');
+        errorStatus.textContent = xhrdata;
+        errorStatus.appendChild(errorLinks);
+        errorStatus.style = 'z-index: 99';
+        errorStatus.style.position = 'fixed';
+        errorLinks.addEventListener('click', errorLinksClickHandler);
       }
     },
     errorBlockLoadFile: function (errorMessage) {
