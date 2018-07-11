@@ -109,6 +109,7 @@
 
   window.preview = {
     pictureMainBlockHandler: function (evt) {
+
       var target = evt.target;
       var elementTargetImg;
       if (target.classList.contains('picture__img') || target.classList.contains('picture__link')) {
