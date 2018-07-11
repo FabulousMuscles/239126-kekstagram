@@ -20,18 +20,28 @@
   window.scaleFilter = {
     popupKeydownHandler: function (evt) {
       if (evt.keyCode === window.dataFile.ESC_KEYCODE) {
-        closePopup();
+        window.scaleFilter.closePopup();
       }
     },
-    imgUpload: uploadSelectImage.querySelector('.img-upload__overlay')
+    imgUpload: uploadSelectImage.querySelector('.img-upload__overlay'),
+    closePopup: function () {
+      window.scaleFilter.imgUpload.classList.add('hidden');
+      document.removeEventListener('keydown', window.scaleFilter.popupKeydownHandler);
+      var inputImg = document.querySelector('.img-upload__input');
+      inputImg.value = '';
+    }
   };
 
-  var openPopup = function () {
+  var setDefaultImgSettings = function () {
     resizeControlValue.value = MAX_VALUE + '%';
     imgUploadPreviewWrapper.style = 'transform: scale(' + (Number(resizeControlValue.value.replace('%', '')) / MAX_VALUE) + ')';
     scaleValue.value = 0;
-    var noneEffectButton = document.querySelector('#effect-none');
-    noneEffectButton.setAttribute('checked', '');
+    document.querySelector('#effect-none').checked = true;
+  };
+
+  var openPopup = function () {
+    setDefaultImgSettings();
+
     if (imgPreview.classList.item(0)) {
       imgPreview.removeAttribute('class');
 
@@ -42,11 +52,6 @@
     window.scaleFilter.imgUpload.classList.remove('hidden');
     scaleWrapper.classList.add('hidden');
     document.addEventListener('keydown', window.scaleFilter.popupKeydownHandler);
-  };
-
-  var closePopup = function () {
-    window.scaleFilter.imgUpload.classList.add('hidden');
-    document.removeEventListener('keydown', window.scaleFilter.popupKeydownHandler);
   };
 
   var inputChangeHandler = function () {
@@ -131,9 +136,7 @@
   var imgUploadClickHandler = function (evt) {
     var target = evt.target;
     if (target.id === 'upload-cancel') {
-      closePopup();
-    } else if (target.classList.contains('img-upload__overlay')) {
-      closePopup();
+      window.scaleFilter.closePopup();
     } else if (target.name === 'effect') {
       toggleFiltres(evt);
     } else if (target.classList.contains('resize__control')) {

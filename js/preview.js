@@ -10,6 +10,8 @@
   var elementComment;
   var visibleCommentCount;
   var loadMore;
+  var errorLinks;
+  var placedErrorElement;
 
   var renderBigPicture = function (arrayObjects) {
     visibleCommentCount = 0;
@@ -88,8 +90,26 @@
     return placedRenderedPicture;
   };
 
+  var errorLinksRemoveElement = function () {
+    document.body.removeChild(placedErrorElement);
+    placedErrorElement = '';
+    window.scaleFilter.closePopup();
+    errorLinks.removeEventListener('click', errorLinksClickHandler);
+  };
+
+  var errorLinksClickHandler = function (evt) {
+    var target = evt.target;
+    evt.preventDefault();
+    if (target === errorLinks.firstElementChild) {
+      window.backend.upload(new FormData(window.formFile.form), errorLinksRemoveElement, window.preview.errorBlockUploadFile);
+    } else if (target === errorLinks.lastElementChild) {
+      errorLinksRemoveElement();
+    }
+  };
+
   window.preview = {
     pictureMainBlockHandler: function (evt) {
+
       var target = evt.target;
       var elementTargetImg;
       if (target.classList.contains('picture__img') || target.classList.contains('picture__link')) {
@@ -103,20 +123,29 @@
         for (var i = 0; i < window.dataFile.downloadedObjects.length; i++) {
           if (elementTargetImg.includes(window.dataFile.downloadedObjects[i].url)) {
             index = i;
-            window.backend.load(renderDataPictures, window.preview.errorBlock);
+            window.backend.load(renderDataPictures, window.preview.errorBlockLoadFile);
           }
         }
       }
     },
-    errorBlockUploadFile: function () {
-      var errorElement = document.querySelector('#picture')
+    errorBlockUploadFile: function (xhrdata) {
+      if (!placedErrorElement) {
+        var errorElement = document.querySelector('#picture')
     .content
       .querySelector('.img-upload__message--error');
-      var fragment = document.createDocumentFragment();
-      window.scaleFilter.imgUpload.classList.add('hidden');
-      errorElement.classList.remove('hidden');
-      fragment.appendChild(errorElement);
-      window.gallery.main.appendChild(fragment);
+        var fragment = document.createDocumentFragment();
+        placedErrorElement = errorElement.cloneNode(true);
+        fragment.appendChild(placedErrorElement);
+        document.body.insertBefore(fragment, window.gallery.main);
+        placedErrorElement.classList.remove('hidden');
+        errorLinks = placedErrorElement.querySelector('.error__links').cloneNode(true);
+        var errorStatus = document.querySelector('.error');
+        errorStatus.textContent = xhrdata;
+        errorStatus.appendChild(errorLinks);
+        errorStatus.style = 'z-index: 99';
+        errorStatus.style.position = 'fixed';
+        errorLinks.addEventListener('click', errorLinksClickHandler);
+      }
     },
     errorBlockLoadFile: function (errorMessage) {
       var errorElement = document.createElement('div');
@@ -127,7 +156,7 @@
       errorElement.style.fontSize = '30px';
 
       errorElement.textContent = errorMessage;
-      document.body.insertAdjacentElement('afterbegin', errorElement);
+      document.body.insertBefore(errorElement, window.gallery.main);
     },
     pictureMainBlockKeydownHandler: function (evt) {
       if (evt.keyCode === window.dataFile.ENTER_KEYCODE) {
