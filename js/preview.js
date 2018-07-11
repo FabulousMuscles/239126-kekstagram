@@ -103,12 +103,18 @@
     if (target === errorLinks.firstElementChild) {
       window.backend.upload(new FormData(window.formFile.form), errorLinksRemoveElement, window.preview.errorBlockUploadFile);
     } else if (target === errorLinks.lastElementChild) {
+<<<<<<< HEAD
         errorLinksRemoveElement();
       }
+=======
+      errorLinksRemoveElement();
+    }
+>>>>>>> 4dba8f7a118bc7f161f7d29df6de100c96c5e1c1
   };
 
   window.preview = {
     pictureMainBlockHandler: function (evt) {
+
       var target = evt.target;
       var elementTargetImg;
       if (target.classList.contains('picture__img') || target.classList.contains('picture__link')) {
@@ -129,21 +135,21 @@
     },
     errorBlockUploadFile: function (xhrdata) {
       if (!placedErrorElement) {
-         var errorElement = document.querySelector('#picture')
+        var errorElement = document.querySelector('#picture')
     .content
       .querySelector('.img-upload__message--error');
-      var fragment = document.createDocumentFragment();
-      placedErrorElement = errorElement.cloneNode(true);
-      fragment.appendChild(placedErrorElement);
-      document.body.insertBefore(fragment, window.gallery.main);
-      placedErrorElement.classList.remove('hidden');
-      errorLinks = placedErrorElement.querySelector('.error__links').cloneNode(true);
-      var errorStatus = document.querySelector('.error');
-      errorStatus.textContent = xhrdata;
-      errorStatus.appendChild(errorLinks);
-      errorStatus.style = 'z-index: 99';
-      errorStatus.style.position = 'fixed';
-      errorLinks.addEventListener('click', errorLinksClickHandler);
+        var fragment = document.createDocumentFragment();
+        placedErrorElement = errorElement.cloneNode(true);
+        fragment.appendChild(placedErrorElement);
+        document.body.insertBefore(fragment, window.gallery.main);
+        placedErrorElement.classList.remove('hidden');
+        errorLinks = placedErrorElement.querySelector('.error__links').cloneNode(true);
+        var errorStatus = document.querySelector('.error');
+        errorStatus.textContent = xhrdata;
+        errorStatus.appendChild(errorLinks);
+        errorStatus.style = 'z-index: 99';
+        errorStatus.style.position = 'fixed';
+        errorLinks.addEventListener('click', errorLinksClickHandler);
       }
     },
     errorBlockLoadFile: function (errorMessage) {
