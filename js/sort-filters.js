@@ -30,6 +30,7 @@
     .sort(function (a, b) {
       return b.comments.length - a.comments.length;
     });
+
     return sortedByTopObjects;
   };
 
