@@ -142,7 +142,6 @@
     } else if (target.classList.contains('resize__control')) {
       resizeImage(evt);
     }
-
     return target;
   };
 
